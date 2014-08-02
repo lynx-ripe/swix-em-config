@@ -1,0 +1,23 @@
+{
+    "name": "swix/swix-em-config",
+    "type": "library",
+    "description": "Swix Event Manager configuration helper module. Allows to attach listeners and aggregates via application config",
+    "keywords": ["event manager", "configuration", "config", "zf2"],
+    "homepage": "https://github.com/a-vasyliev/swix-em-config",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrii Vasyliev",
+            "email": "contact@andrey-vasiliev.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "SwixEmConfig": ["src/"]
+        }
+    }
+}
