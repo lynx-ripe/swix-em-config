@@ -42,14 +42,22 @@ class MergeConfigListener
                 // by default use standard priority is 1
                 $listener['priority'] = isset($listener['priority']) ? $listener['priority'] : 1;
 
-                $sem->attach($listener['id'], $listener['event'], $serviceManager->get($listener['listener']));
+                $sem->attach(
+                    $listener['id'],
+                    $listener['event'],
+                    function () use ($serviceManager, $listener) {
+                        return $serviceManager->get($listener['listener']);
+                    }
+                );
             }
         }
 
         if (isset($config['event_manager']['aggregates'])) {
             foreach ($config['event_manager']['aggregates'] as $aggregate) {
                 $sem->attachAggregate(
-                    $serviceManager->get($aggregate['aggregate']),
+                    function () use ($serviceManager, $aggregate) {
+                        return $serviceManager->get($aggregate['aggregate']);
+                    },
                     isset($aggregate['priority']) ? $aggregate['priority'] : 1
                 );
             }
