@@ -11,7 +11,7 @@ use Zend\ServiceManager\ServiceManager;
  *
  * @package SwixEmConfig\EventManager
  */
-class MergeConfigListener
+class LoadModulesPostListener
 {
     /**
      * Attach event listeners from 'event_manager' config section.
@@ -24,7 +24,7 @@ class MergeConfigListener
     public function __invoke(ModuleEvent $event)
     {
         /**
-         * @var ServiceManager     $serviceManager
+         * @var ServiceManager $serviceManager
          * @var SharedEventManager $sem
          */
         $serviceManager = $event->getParam('ServiceManager');
@@ -45,9 +45,8 @@ class MergeConfigListener
                 $sem->attach(
                     $listener['id'],
                     $listener['event'],
-                    function () use ($serviceManager, $listener) {
-                        return $serviceManager->get($listener['listener']);
-                    }
+                    $serviceManager->get($listener),
+                    $listener['priority']
                 );
             }
         }
@@ -55,9 +54,7 @@ class MergeConfigListener
         if (isset($config['event_manager']['aggregates'])) {
             foreach ($config['event_manager']['aggregates'] as $aggregate) {
                 $sem->attachAggregate(
-                    function () use ($serviceManager, $aggregate) {
-                        return $serviceManager->get($aggregate['aggregate']);
-                    },
+                    $serviceManager->get($aggregate['aggregate']),
                     isset($aggregate['priority']) ? $aggregate['priority'] : 1
                 );
             }

@@ -23,8 +23,8 @@ class Module implements InitProviderInterface
     {
         $manager->getEventManager()->getSharedManager()->attach(
             '*',
-            ModuleEvent::EVENT_MERGE_CONFIG,
-            new EventManager\MergeConfigListener
+            ModuleEvent::EVENT_LOAD_MODULES_POST,
+            new EventManager\LoadModulesPostListener
         );
     }
 }
