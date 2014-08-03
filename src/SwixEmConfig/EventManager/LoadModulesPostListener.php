@@ -29,7 +29,7 @@ class LoadModulesPostListener
          */
         $serviceManager = $event->getParam('ServiceManager');
         $sem = $event->getTarget()->getEventManager()->getSharedManager();
-        $config = $event->getConfigListener()->getMergedConfig(false);
+        $config = $serviceManager->get('Config');
 
         if (!isset($config['event_manager'])) {
             return;
