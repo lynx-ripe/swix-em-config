@@ -45,7 +45,7 @@ class LoadModulesPostListener
                 $sem->attach(
                     $listener['id'],
                     $listener['event'],
-                    $serviceManager->get($listener),
+                    new ProxyListener($serviceManager, $listener),
                     $listener['priority']
                 );
             }
