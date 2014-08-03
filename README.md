@@ -6,23 +6,27 @@ Installation
 --------------
 Add this line to your composer `require` key: `"swix/swix-em-config": "dev-master"` and update Composer. Then enable `SwixEmConfig` module in your application config.
 
+Important note
+--------------
+Event listeners can be attached only after loading of all modules (ModuleEvent::EVENT_LOAD_MODULES_POST)
+
 Example
 --------------
 In yout application or module config:
 ```php
 <?php
-use Zend\ModuleManager\ModuleEvent;
+use Zend\Mvc\MvcEvent;
 
 return [
     'service_manager' =>  [
         'invokables' => [
             'SomeAggregate' => 'SomeNamespaces\SomeAggregate',
-            'LoadModulesPostListener' => 'SomeNamespaces\LoadModulesPostListener'
+            'BootstrapListener' => 'SomeNamespaces\BootstrapListener'
         ]
     ],
     'event_manager' => [
         'listeners' => [
-            ['event' => ModuleEvent::EVENT_LOAD_MODULES_POST, 'listener' => 'LoadModulesPostListener']
+            ['event' => MvcEvent::EVENT_BOOTSTRAP, 'listener' => 'BootstrapListener']
         ],
         'aggregates' => [
             ['aggregate' => 'SomeAggregate']
