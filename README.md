@@ -12,7 +12,7 @@ Event listeners can be attached only after loading of all modules (ModuleEvent::
 
 Example
 --------------
-In yout application or module config:
+In your application or module config:
 ```php
 <?php
 use Zend\Mvc\MvcEvent;

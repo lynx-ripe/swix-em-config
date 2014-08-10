@@ -15,9 +15,7 @@ class LoadModulesPostListener
 {
     /**
      * Attach event listeners from 'event_manager' config section.
-     * Provides easy way to attach listeners via SharedEventManager.
-     * MergeConfig event is earliest place where we can get merged
-     * configs and attach system events.
+     * Provides easy way to attach listeners via SharedEventManager..
      *
      * @param ModuleEvent $event
      */
