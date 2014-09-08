@@ -37,13 +37,13 @@ class LoadModulesPostListener
             foreach ($config['event_manager']['listeners'] as $listener) {
                 // by default attach to any target
                 $listener['id'] = isset($listener['id']) ? $listener['id'] : '*';
-                // by default use standard priority is 1
+                // by default use standard priority
                 $listener['priority'] = isset($listener['priority']) ? $listener['priority'] : 1;
 
                 $sem->attach(
                     $listener['id'],
                     $listener['event'],
-                    new ProxyListener($serviceManager, $listener),
+                    new ProxyListener($serviceManager, $listener['listener']),
                     $listener['priority']
                 );
             }

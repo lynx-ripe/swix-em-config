@@ -5,6 +5,10 @@ namespace SwixEmConfig\EventManager;
 use Zend\EventManager\EventInterface;
 use Zend\ServiceManager\ServiceManager;
 
+/**
+ * Class ProxyListener
+ * @package SwixEmConfig\EventManager
+ */
 class ProxyListener
 {
     /**
