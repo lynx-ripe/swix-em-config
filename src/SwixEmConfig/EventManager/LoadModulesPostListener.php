@@ -40,10 +40,13 @@ class LoadModulesPostListener
                 // by default use standard priority
                 $listener['priority'] = isset($listener['priority']) ? $listener['priority'] : 1;
 
+                $proxy = new ProxyListener($listener['listener']);
+                $proxy->setServiceLocator($serviceManager);
+
                 $sem->attach(
                     $listener['id'],
                     $listener['event'],
-                    new ProxyListener($serviceManager, $listener['listener']),
+                    $proxy,
                     $listener['priority']
                 );
             }

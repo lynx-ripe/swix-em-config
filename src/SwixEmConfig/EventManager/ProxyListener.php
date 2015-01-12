@@ -3,18 +3,16 @@
 namespace SwixEmConfig\EventManager;
 
 use Zend\EventManager\EventInterface;
-use Zend\ServiceManager\ServiceManager;
+use Zend\ServiceManager;
 
 /**
  * Class ProxyListener
+ *
  * @package SwixEmConfig\EventManager
  */
-class ProxyListener
+class ProxyListener implements ServiceManager\ServiceLocatorAwareInterface
 {
-    /**
-     * @var ServiceManager
-     */
-    protected $serviceManager;
+    use ServiceManager\ServiceLocatorAwareTrait;
 
     /**
      * @var string
@@ -22,12 +20,10 @@ class ProxyListener
     protected $listener;
 
     /**
-     * @param ServiceManager $serviceManager
      * @param string $listener
      */
-    public function __construct(ServiceManager $serviceManager, $listener)
+    public function __construct($listener)
     {
-        $this->serviceManager = $serviceManager;
         $this->listener = $listener;
     }
 
@@ -37,6 +33,6 @@ class ProxyListener
      */
     public function __invoke(EventInterface $event)
     {
-        return $this->serviceManager->get($this->listener)->__invoke($event);
+        return $this->getServiceLocator()->get($this->listener)->__invoke($event);
     }
 }
