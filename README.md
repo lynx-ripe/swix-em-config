@@ -26,7 +26,10 @@ return [
     ],
     'event_manager' => [
         'listeners' => [
+            // This listener will be retrived via ServiceManager
             ['event' => MvcEvent::EVENT_BOOTSTRAP, 'listener' => 'BootstrapListener']
+            // This listener will be created directly if its class exists
+            ['event' => 'some_event', 'listener' => SomeNamespaces\WithoutSM\BootstrapListener::class]
         ],
         'aggregates' => [
             ['aggregate' => 'SomeAggregate']
