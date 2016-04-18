@@ -34,7 +34,14 @@ class ProxyListener implements ServiceManager\ServiceLocatorAwareInterface
     public function __invoke(EventInterface $event)
     {
         $serviceLocator = $this->getServiceLocator();
+        $listener = null;
 
-        return $serviceLocator->has($this->listener) ? $serviceLocator->get($this->listener)->__invoke($event) : null;
+        if ($serviceLocator->has($this->listener)) {
+            $listener = $serviceLocator->get($this->listener);
+        } elseif (class_exists($this->listener)) {
+            $listener = new $this->listener;
+        }
+
+        return $listener ? $listener->__invoke($event) : null;
     }
 }
