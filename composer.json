@@ -1,9 +1,9 @@
 {
-    "name": "swix/swix-em-config",
+    "name": "lynx-ripe/swix-em-config",
     "type": "library",
     "description": "Swix Event Manager configuration helper module. Allows to attach listeners and aggregates via application config",
     "keywords": ["event manager", "configuration", "config", "zf2"],
-    "homepage": "https://github.com/a-vasyliev/swix-em-config",
+    "homepage": "https://github.com/lynx-ripe/swix-em-config",
     "license": "MIT",
     "authors": [
         {
